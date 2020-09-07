@@ -21,7 +21,7 @@ export class CompetitionFormComponent implements OnInit {
     json: any;
     filespath = 'http://localhost:3000/uploads/';
     competition: CompModel = new CompModel();
-    allcomps: CompModel [];
+    allcomps:any;
 
     constructor(private http: HttpClient, private route: ActivatedRoute) {
     }
@@ -40,7 +40,7 @@ export class CompetitionFormComponent implements OnInit {
                         .subscribe(comps => {
                             console.log(comps);
                             this.allcomps = comps as CompModel [];
-                            this.competition = this.allcomps.find( element => element._id === this.compId);
+                            this.competition = this.allcomps.find( (element: { _id: any; }) => element._id === this.compId);
                             console.log(this.competition);
                             if (this.competition) {
                                 const file = new File([""], this.filespath + this.competition.file_name);
